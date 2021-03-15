@@ -16,7 +16,7 @@ class App extends React.Component {
   }
 
   callAPI() {
-    fetch('http://localhost:9000/testAPI')
+    fetch('http://localhost:9000/run')
         .then(res => res.text())
         .then(res => this.setState({ apiResponse: res }));
 }
@@ -40,6 +40,10 @@ class App extends React.Component {
       .then(([buffer, blob]) => {
         var fd = new FormData();
         fd.append('audio',blob);
+
+        /*fetch(
+          apiU
+        )*/
 
         const blobURL = URL.createObjectURL(blob)
         this.setState({ blobURL, isRecording: false });
