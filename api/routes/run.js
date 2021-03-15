@@ -36,8 +36,14 @@ req.query.lastname*/] );
     // Takes stdout data from script which executed 
     // with arguments and send this data to res object 
     process.stdout.on('data', function(data) { 
-        res.send(data.toString()); 
+        return res.send(data.toString()); 
     } ) 
+
+    process.on('close', (code) => {
+        if (code > 0){
+        console.log(code);
+          return res.status(500).json({ msg: "Internal server error" });
+    }});
 } 
 
 module.exports = router;
