@@ -68,12 +68,15 @@ class App extends React.Component {
     return (
       <div className="App">
         <header className="App-header">
-          <h1>{this.state.apiResponse}</h1>
+          <h4>Record by Saying </h4>
+          <h1>“Dogs are sitting by the door”</h1>
           <div>
           <button className="button green" onClick={this.start} disabled={this.state.isRecording}>Start Recording</button>
           <button className="button red" onClick={this.stop} disabled={!this.state.isRecording}>Stop and Submit</button>
           </div>
+          <h3>{this.state.apiResponse}</h3>
           <audio src={this.state.blobURL} controls="controls" />
+          
         </header>
       </div>
     );
