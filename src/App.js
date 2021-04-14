@@ -15,11 +15,11 @@ class App extends React.Component {
     };
   }
 
-  callAPI() {
+  /*callAPI() {
     fetch('http://localhost:9000/run')
         .then(res => res.text())
         .then(res => this.setState({ apiResponse: res }));
-}
+}*/
 
   start = () => {
     if (this.state.isBlocked) {
@@ -38,20 +38,25 @@ class App extends React.Component {
       .stop()
       .getMp3()
       .then(([buffer, blob]) => {
-        var fd = new FormData();
-        fd.append('audio',blob);
-
-        /*fetch(
-          apiU
-        )*/
 
         const blobURL = URL.createObjectURL(blob)
+
+        var fd = new FormData();
+        fd.append('audio',blob,"music.mp3");
+        console.log(blob);
+
+
+        fetch('http://localhost:9000/run',{ method: 'POST' , body: fd})
+        .then(res => res.text())
+        .then(res => this.setState({ apiResponse: res }));
+
+        
         this.setState({ blobURL, isRecording: false });
       }).catch((e) => console.log(e));
   };
 
   componentDidMount() {
-    this.callAPI();
+    //this.callAPI();
     navigator.getUserMedia({ audio: true },
       () => {
         console.log('Permission Granted');

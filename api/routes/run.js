@@ -1,3 +1,19 @@
+const multer = require('multer');
+const path = require('path');
+
+var storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, path.join('./uploads'))
+    },
+    filename: function (req, file, cb) {
+        cb(null, file.fieldname + '-' + Date.now()+'.mp3')
+  }
+})
+
+var upload = multer({ storage: storage})
+//var upload = multer({ dest: 'uploads/' })
+
+
 var express = require('express');
 var router = express.Router();
 //var app = express(); 
@@ -13,9 +29,12 @@ router.get('/', function(req, res, next) {
   
 // Function callName() is executed whenever  
 // url is of the form localhost:3000/name 
-router.get('/', callName); 
+router.post('/',upload.single('audio'), callName); 
+
+
   
 function callName(req, res) { 
+    console.log(req.file);
       
     // Use child_process.spawn method from  
     // child_process module and assign it 
@@ -29,7 +48,7 @@ function callName(req, res) {
       
     // E.g : http://localhost:3000/name?firstname=Mike&lastname=Will 
     // so, first name = Mike and last name = Will 
-    var process = spawn('python',["./model/hello.py"/*, 
+    var process = spawn('python',["./model/hello.py",req.file.filename/*, 
                             req.query.firstname, 
 req.query.lastname*/] ); 
   

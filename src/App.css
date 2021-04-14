@@ -1,15 +1,15 @@
 .App {
   text-align: center;
 }
-h1{
+h1 {
   margin: 0px;
-  color: black ;
+  color: black;
 }
-h4{
+h4 {
   padding: 0px;
-  margin: 0px; 
+  margin: 0px;
 }
-h3{
+h3 {
   margin-bottom: 40px;
 }
 
@@ -39,8 +39,8 @@ h3{
 }
 
 button:disabled {
-  cursor:not-allowed ;
+  cursor: not-allowed;
 }
-.red{
+.red {
   background-color: azure;
 }
