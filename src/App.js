@@ -38,12 +38,17 @@ class App extends React.Component {
       .stop()
       .getMp3()
       .then(([buffer, blob]) => {
+        //const newblob = new Blob(buffer, { type: 'audio/wav' })
+        //const blobURL = URL.createObjectURL(newblob)
 
+        //var fd = new FormData();
+        //fd.append('audio',newblob,"music.wav");
         const blobURL = URL.createObjectURL(blob)
 
         var fd = new FormData();
         fd.append('audio',blob,"music.mp3");
         console.log(blob);
+        //console.log(newblob);
 
 
         fetch('http://localhost:9000/run',{ method: 'POST' , body: fd})
